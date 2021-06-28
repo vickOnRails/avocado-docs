@@ -3,12 +3,12 @@ title: Quick Start
 section: Getting-Started
 ---
 
-import { Button } from '@avocado-ui/react'
-import { LiveConfig } from 'smooth-doc/components'
+import { Button } from "@avocado-ui/react";
+import { LiveConfig } from "smooth-doc/components";
 
 <!-- Define `@avocado-ui/react` module as `{ Button }` -->
 
-<LiveConfig modules={{ '@avocado-ui/react': { Button } }} />
+<LiveConfig modules={{ "@avocado-ui/react": { Button } }} />
 
 # Quick Start
 
@@ -19,28 +19,138 @@ How to use avocado-ui in your React project
 After installation, `avocado-ui` is now available in your project. Import your desired component from the `@avocado-ui/react` package like so and you're good to go!
 
 ```jsx live noInline
-import { Button } from '@avocado-ui/react'
+import { Button } from "@avocado-ui/react";
 render(
   <>
     <Button>Example</Button>
   </>
-)
+);
 ```
 
 ## Theming
 
-> Todo
+Theming in Avocado works by passing in strategic properties that replace their default values in the design system. The plan is to make all tokens customizable, but only colors are customizable at the moment.
+
+Here's an example of how to customizable the `primary` and `secondary` colors in the design system.
+
+```jsx
+import { Button, ThemeProvider } from "@avocado-ui/react";
+
+const customTheme = {
+  primaryColor: "#3f00ff",
+  secondaryColor: "#6330ff",
+};
+
+render(
+  <ThemeProvider theme={customTheme}>
+    <Button>Example</Button>
+  </ThemeProvider>
+);
+```
+
+Passing this custom theme into the `theme` changes the theme of our design system. Here's a [codesandbox demo](https://codesandbox.io/s/serene-visvesvaraya-b8kjh) showing an example of this working.
+
+> You have to be careful when using the `primary` & `secondary` colors. They have to atleast look good together for your design system to be decent.
 
 ## Other Frameworks
 
 ### Create React App setup
 
-> Todo
+Set up Avocado in CRA by wrapping the whole application inside the root component. It'll look something like this...
+
+```jsx
+// index.js
+import { StrictMode } from "react";
+import { ThemeProvider } from "@avocado-ui/react";
+import ReactDOM from "react-dom";
+
+import App from "./App";
+
+const theme = {
+  primaryColor: "#3f00ff",
+  secondaryColor: "#6330ff",
+};
+
+const rootElement = document.getElementById("root");
+ReactDOM.render(
+  <StrictMode>
+    <ThemeProvider theme={theme}>
+      <App />
+    </ThemeProvider>
+  </StrictMode>,
+  rootElement
+);
+```
+
+You can see this live in this [codesandbox](https://codesandbox.io/s/serene-visvesvaraya-b8kjh).
 
 ### NextJS setup
 
-> Todo
+The key to setting up Avocado in NextJS lies in the `_app.js` file. This might sound tricky to you if you're new to Nextjs, but you only have to understand that `_app.js` wraps around all pages in the app.
+
+Here's an example of setting up the Avocado theme in a nextjs application
+
+```jsx
+// _app.js
+import { ThemeProvider } from "@avocado-ui/react";
+import "../styles.css";
+
+const theme = {
+  primaryColor: "#3f00ff",
+  secondaryColor: "#6330ff",
+};
+
+export default function MyApp({ Component, pageProps }) {
+  return (
+    <ThemeProvider theme={theme}>
+      <Component {...pageProps} />
+    </ThemeProvider>
+  );
+}
+```
+
+You can see this demo live on [this codesandbox](https://codesandbox.io/s/young-leaf-js81d).
 
 ### Gatsby setup
 
 > Todo
+
+Gatsby shares a lot of similiarities with Nextjs. The most prominent being that they can both render React on the server and ship HTML to the browser.
+
+Setting up Avocado in Gatsby involves 2 files - `gatsby-browser.js` and `gatsby-ssr.js`. Here's an example of using Avocado in Gatsby...
+
+```jsx
+// gatsby-browser.js
+import React from "react";
+import { ThemeProvider } from "@avocado-ui/react";
+
+const theme = {
+  primaryColor: "#3f00ff",
+  secondaryColor: "#6330ff",
+};
+
+export const wrapRootElement = ({ element }) => {
+  return <ThemeProvider theme={theme}>{element}</ThemeProvider>;
+};
+```
+
+---
+
+```jsx
+// gatsby-browser.js
+import React from "react";
+import { ThemeProvider } from "@avocado-ui/react";
+
+const theme = {
+  primaryColor: "#3f00ff",
+  secondaryColor: "#6330ff",
+};
+
+export const wrapRootElement = ({ element }) => {
+  return <ThemeProvider theme={theme}>{element}</ThemeProvider>;
+};
+```
+
+Here's an [codesandbox](https://codesandbox.io/s/clever-snyder-01dln) example of Avocado on Gatsby.
+
+> It feels strange the we have to have the same contents in `gatsby-browser.js` & `gatsby-ssr.js`. I've tried having removing one of them, but it just janks after then.
