@@ -1,5 +1,6 @@
 import React from "react";
 import { ThemeProvider } from "@avocado-ui/react";
+import "./style.css";
 
 const appTheme = {};
 
