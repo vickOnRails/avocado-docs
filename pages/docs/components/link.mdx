@@ -4,12 +4,12 @@ section: Components
 ---
 
 import { LiveConfig } from "smooth-doc/components";
-import { Button, Link } from "@avocado-ui/react";
+import { Button, Link, Flex } from "@avocado-ui/react";
 import { Activity, Save, Heart, User } from "react-feather";
 
 <!-- Define `@avocado-ui/react` module as `{ Button }` -->
 
-<LiveConfig modules={{ "@avocado-ui/react": { Button, Link } }} />
+<LiveConfig modules={{ "@avocado-ui/react": { Button, Link, Flex } }} />
 <LiveConfig modules={{ "react-feather": { Activity, Save, Heart, User } }} />
 
 # Link
@@ -30,10 +30,10 @@ render(<Link href="/">New Link</Link>);
 The `Link` component comes in 4 basic types - `default`, `solid`, `outline`, and `ghost`. You can use any one of them by passing their values into the `type` prop.
 
 ```jsx live noInline
-import { Link } from "@avocado-ui/react";
+import { Link, Flex } from "@avocado-ui/react";
 
 render(
-  <>
+  <Flex gap={12} alignItems="center">
     <Link href="/" type="default">
       New Link
     </Link>
@@ -46,7 +46,7 @@ render(
     <Link href="/" type="ghost">
       New Link
     </Link>
-  </>
+  </Flex>
 );
 ```
 
@@ -55,9 +55,9 @@ render(
 The `shape` prop in `Link` works like that of the `Button` component and can take in 3 basic shape types - `square`, `curve` and `round`.
 
 ```jsx live noInline
-import { Link } from "@avocado-ui/react";
+import { Link, Flex } from "@avocado-ui/react";
 render(
-  <>
+  <Flex gap={12}>
     <Link shape="curve" href="/" type="outline">
       New Link
     </Link>
@@ -67,7 +67,7 @@ render(
     <Link shape="square" href="/" type="outline">
       New Link
     </Link>
-  </>
+  </Flex>
 );
 ```
 
@@ -76,9 +76,9 @@ render(
 The `Link` component comes in 3 basic sizes - `sm`, `md` and `lg`. You can pass any of these to the `size` prop and the `Link` component will adjust accordingly.
 
 ```jsx live noInline
-import { Link } from "@avocado-ui/react";
+import { Link, Flex } from "@avocado-ui/react";
 render(
-  <>
+  <Flex gap={12} alignItems="center">
     <Link size="sm" href="/" type="outline">
       New Link
     </Link>
@@ -88,7 +88,7 @@ render(
     <Link size="lg" href="/" type="outline">
       New Link
     </Link>
-  </>
+  </Flex>
 );
 ```
 
@@ -97,11 +97,11 @@ render(
 It's very common to pair the `Link` component with icons. You can do this with the `prefixIcon` and `suffixIcon` prop. You'll have to set this to a `React.ReactNode` component, but it's more advisable to use an icon. Here's it working with [feather icons.](https://feathericons.com/)
 
 ```jsx live noInline
-import { Link } from "@avocado-ui/react";
+import { Link, Flex } from "@avocado-ui/react";
 import { Activity, Save, Heart, User } from "react-feather";
 
 render(
-  <>
+  <Flex gap={12} alignItems="center">
     <Link prefixIcon={<Activity />} href="/" type="solid">
       New Link
     </Link>
@@ -111,7 +111,7 @@ render(
     <Link prefixIcon={<User />} suffixIcon={<Heart />} href="/" type="solid">
       New Link
     </Link>
-  </>
+  </Flex>
 );
 ```
 
